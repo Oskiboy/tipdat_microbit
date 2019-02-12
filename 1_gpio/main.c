@@ -57,7 +57,7 @@ int main() {
     while(1){
         /* Check if button B is pressed;
          * turn on LED matrix if it is. */
-        if((GPIO->IN & (BUTTON_B_MASK))) {
+        if(!(GPIO->IN & BUTTON_B_MASK)) {
             for(int i = 0; i < 5; i++) {
                 for(int j = 0; j < 5; j++) {
                     set_led(j, i, ON);
@@ -66,10 +66,10 @@ int main() {
         }
 
         /* Check if button A is pressed;
-
+    
 	* turn off LED matrix if it is. */
         
-        if((GPIO->IN & (BUTTON_A_MASK))) {
+        if(!(GPIO->IN & BUTTON_A_MASK)) {
             for(int i = 0; i < 5; i++) {
                 for(int j = 0; j < 5; j++) {
                     set_led(i, j, OFF);
@@ -77,7 +77,7 @@ int main() {
             }
         }
        
-	sleep = 10000;
+	sleep = 1000;
 	while(--sleep);
 
     }
