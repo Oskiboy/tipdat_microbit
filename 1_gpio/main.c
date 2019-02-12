@@ -44,31 +44,22 @@ void set_led(uint16_t row, uint16_t col, state_t state) {
 int main() {
     // Configure LED Matrix
     // GPIO->DIRSET = (0b111111111111 << 4)
-    for(int i = 4; i <= 15; i++){
+    for(uint32_t i = 4; i <= 15; i++){
 	GPIO->DIRSET = (1 << i);
-	GPIO->OUTCLR = (1 << i);
-        if(i >= 13) {
-            GPIO->OUTSET = (1 << i);
-        }
+	GPIO->OUTSET= (1 << i);
     }
 
     // Configure buttons
-    //GPIO->DIRCLR = (1 << 26);
-    //GPIO->DIRCLR = (1 << 17);
-    //GPIO->PIN_CNF[26] = GPIO_INPUT_MASK;  //pin 26 
-    //GPIO->PIN_CNF[17] = GPIO_INPUT_MASK;   //pin 17 
+    GPIO->PIN_CNF[26] = GPIO_INPUT_MASK;  //pin 26 
+    GPIO->PIN_CNF[17] = GPIO_INPUT_MASK;   //pin 17 
     int sleep = 0;
-    GPIO->OUTSET = (1 << 14);
-    GPIO->OUTCLR = (1 << 6);
-    while(1)
-        ;
+    
     while(1){
-        set_led(0, 0, ON);
         /* Check if button B is pressed;
-            * turn on LED matrix if it is. */
-        if(GPIO->IN & ~(BUTTON_B_MASK)) {
-            for(int i = 0; i < 9; i++) {
-                for(int j = 0; j < 3; j++) {
+         * turn on LED matrix if it is. */
+        if((GPIO->IN & (BUTTON_B_MASK))) {
+            for(int i = 0; i < 5; i++) {
+                for(int j = 0; j < 5; j++) {
                     set_led(j, i, ON);
                 }
             }
@@ -77,17 +68,16 @@ int main() {
         /* Check if button A is pressed;
 
 	* turn off LED matrix if it is. */
-        /*
-        if(GPIO->IN & ~(BUTTON_A_MASK)) {
-            for(int i = 0; i < 9; i++) {
-                for(int j = 0; j < 3; j++) {
+        
+        if((GPIO->IN & (BUTTON_A_MASK))) {
+            for(int i = 0; i < 5; i++) {
+                for(int j = 0; j < 5; j++) {
                     set_led(i, j, OFF);
                 }
             }
         }
-        */
+       
 	sleep = 10000;
-        set_led(0, 0, ON);
 	while(--sleep);
 
     }
