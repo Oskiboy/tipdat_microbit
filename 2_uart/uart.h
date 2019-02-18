@@ -4,8 +4,8 @@
 #define UART_READ_ERROR   ((cuart_t) -2)
 #define UART ((NRF_UART_REG*)0x40002000)
 
-#define RXD_PIN (25)
-#define TXD_PIN (24)
+#define RXD_PIN (24)
+#define TXD_PIN (25)
 
 typedef int32_t uart_status_t;
 typedef int16_t cuart_t;

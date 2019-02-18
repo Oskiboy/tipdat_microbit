@@ -8,6 +8,7 @@ uart_status_t uart_init(void) {
     //Sets the CTS and RTS to disconnectedd
     UART->PSELCTS = 0xFFFFFFFF;
     UART->PSELRTS = 0xFFFFFFFF;
+    UART->CONFIG &= ~(0x1);
     //This corresponds to setting baudrate to 9600
     UART->BAUDRATE = 0x00275000;
 
@@ -19,16 +20,21 @@ uart_status_t uart_init(void) {
 
 cuart_t uart_read(void) {
     cuart_t chr = '\0';
+    if(!UART->RXDRDY) {
+        return chr;
+    }
+
     UART->RXDRDY = 0;
     chr = UART->RXD;
-    return UART_READ_ERROR;
+    
+    return chr;
 }
 
 
-uart_status_t   uart_send(char c){
-    while (!UART->TXDRDY)
+uart_status_t uart_send(char c){
+    while (UART->TXDRDY)
         ;
     UART->TXD = c;
-    UART->TXDRDY = 0;
+    //UART->TXDRDY = 0;
     return 0;
 }
