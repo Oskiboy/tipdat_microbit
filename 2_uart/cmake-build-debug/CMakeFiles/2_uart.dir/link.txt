@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/2_uart.dir/main.c.o CMakeFiles/2_uart.dir/uart.c.o  -o 2_uart 
