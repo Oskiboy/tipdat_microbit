@@ -27,3 +27,11 @@ cuart_t uart_read(void) {
     chr = UART->RXD;
     return UART_READ_ERROR;
 }
+
+
+uart_status_t   uart_send(char c){
+    while (!UART->TXDRDY)
+        ;
+    UART->TXD = c;
+    UART->TXDRDY = 0;
+}
