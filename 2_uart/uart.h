@@ -1,14 +1,14 @@
 #include <stdint.h>
 #define UART_INIT_SUCCESS ((uart_status_t) 0)
 #define UART_INIT_FAILURE ((uart_status_t) -1)
-#define UART_READ_ERROR   ((cuart_t) -2)
+#define UART_READ_ERROR   ((cuart_t) 255)
 #define UART ((NRF_UART_REG*)0x40002000)
 
-#define RXD_PIN (24)
-#define TXD_PIN (25)
+#define RXD_PIN (25)
+#define TXD_PIN (24)
 
 typedef int32_t uart_status_t;
-typedef int16_t cuart_t;
+typedef char cuart_t;
 
 typedef struct {
     volatile uint32_t STARTRX;

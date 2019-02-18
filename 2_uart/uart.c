@@ -2,6 +2,8 @@
 #include "gpio.h"
 
 uart_status_t uart_init(void) {
+    GPIO->DIRSET = (1 << TXD_PIN);
+    GPIO->DIRCLR = (1 << RXD_PIN);
     //Set the RXD and TXD pins
     UART->PSELRXD = RXD_PIN;
     UART->PSELTXD = TXD_PIN;
@@ -20,21 +22,21 @@ uart_status_t uart_init(void) {
 
 cuart_t uart_read(void) {
     cuart_t chr = '\0';
-    if(!UART->RXDRDY) {
+    if(!(UART->RXDRDY)) {
         return chr;
     }
-
     UART->RXDRDY = 0;
     chr = UART->RXD;
-    
+ 
     return chr;
 }
 
 
 uart_status_t uart_send(char c){
-    while (UART->TXDRDY)
-        ;
+    UART->STARTTX = 1;
     UART->TXD = c;
-    //UART->TXDRDY = 0;
+    while(!UART->TXDRDY)
+        ;
+    UART->STARTTX = 0;
     return 0;
 }

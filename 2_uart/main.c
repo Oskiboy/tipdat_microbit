@@ -11,12 +11,10 @@ void light_led() {
 
 int main(void) {
    uart_init(); 
+   char msg = 'X';
    while(1) {
-        uart_send('X');
-        if (uart_read() != '\0') {
-            light_led(); 
-        }
-
-        light_led();
+        msg = uart_read();
+        uart_send(msg);
+        //uart_send('\n');
    }
 }
