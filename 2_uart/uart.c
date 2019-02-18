@@ -17,10 +17,6 @@ uart_status_t uart_init(void) {
     return 0;
 }
 
-uart_status_t uart_send(char c) {
-     
-}
-
 cuart_t uart_read(void) {
     cuart_t chr = '\0';
     UART->RXDRDY = 0;
@@ -34,4 +30,5 @@ uart_status_t   uart_send(char c){
         ;
     UART->TXD = c;
     UART->TXDRDY = 0;
+    return 0;
 }
