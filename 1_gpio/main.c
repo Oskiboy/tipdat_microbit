@@ -1,7 +1,7 @@
 #include <stdint.h>
 
 #define GPIO ((NRF_GPIO_REGS*)0x50000000)
-#define GPIO_INPUT_MASK ((1 << 0)) 
+#define GPIO_INPUT_MASK ((0 << 0)) 
 #define BUTTON_A_MASK (1 << 17)
 #define BUTTON_B_MASK (1 << 26)
 #define BUTTON_A (17)
@@ -26,11 +26,12 @@ typedef enum{
 }state_t;
 
 void set_led(uint16_t row, uint16_t col, state_t state) {
-    static uint8_t table[25][2] = {{13,4},{14,7},{13,5},{14,8},{13,6},
+    static uint8_t table[25][2] = { {13,4},{14,7},{13,5},{14,8},{13,6},
                                     {15,7},{15,8},{15,9},{15,10},{15,11},
                                     {14,5},{13,12},{14,6},{15,12},{14,4},
                                     {13,11},{13,10},{13,9},{13,8},{13,7},
-                                    {15,6},{14,10},{15,4},{14,9},{15,5}};
+                                    {15,6},{14,10},{15,4},{14,9},{15,5}
+                                  };
     if(state == ON) {
         GPIO->OUTSET = (1 << table[row*5 + col][0]);
         GPIO->OUTCLR = (1 << table[row*5 + col][1]);
