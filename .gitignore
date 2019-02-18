@@ -2,3 +2,5 @@
 cmake-build-debug/
 CMakeLists.txt
 .build_system/*
+*/.idea
+*/.vscode
