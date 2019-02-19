@@ -4,8 +4,8 @@
 
 #define GPIO ((NRF_GPIO_REG*)0x50000000)
 
-#define BUTTON_A_PIN (26)
-#define BUTTON_B_PIN (17)
+#define BUTTON_A_PIN (17)
+#define BUTTON_B_PIN (26)
 
 typedef struct {
 	volatile uint32_t RESERVED0[321];

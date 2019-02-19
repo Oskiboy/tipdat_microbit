@@ -7,6 +7,6 @@ void gpio_init() {
 }
 
 uint32_t gpio_read_btn(uint32_t button_pin) {
-    return ~(GPIO->IN & (1 << button_pin));
+    return ((GPIO->IN & (1 << button_pin)) ^ (1 << button_pin));
 }
 
