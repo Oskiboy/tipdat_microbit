@@ -36,7 +36,7 @@ default:
 	@echo Creating hex file
 	$(QUIET)$(OBJCOPY) -O ihex $(BUILD_DIR)/main.elf $(BUILD_DIR)/main.hex
 
-flash:
+flash: default
 	nrfjprog -f $(FAMILY) --sectorerase --program $(BUILD_DIR)/main.hex
 	nrfjprog -f $(FAMILY) --reset
 
