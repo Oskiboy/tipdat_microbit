@@ -55,6 +55,7 @@ typedef struct {
 uart_status_t   uart_init(void);
 uart_status_t   uart_send(char c);
 cuart_t         uart_read(void);
+//Deprecated!! Use iprintf instead
 uart_status_t   uart_write(char* msg, int size);
 
 #endif //UART_H
