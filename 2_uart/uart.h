@@ -1,3 +1,6 @@
+#ifndef UART_H
+#define UART_H
+
 #include <stdint.h>
 #define UART_INIT_SUCCESS ((uart_status_t) 0)
 #define UART_INIT_FAILURE ((uart_status_t) -1)
@@ -20,8 +23,8 @@ typedef struct {
     volatile uint32_t RESERVED1[56];
     volatile uint32_t CTS;
     volatile uint32_t NCTS;
-    volatile uint32_t RESERVED2[4];
     volatile uint32_t RXDRDY;
+    volatile uint32_t RESERVED2[4];
     volatile uint32_t TXDRDY;
     volatile uint32_t RESERVED3[1];
     volatile uint32_t ERROR;
@@ -52,3 +55,6 @@ typedef struct {
 uart_status_t   uart_init(void);
 uart_status_t   uart_send(char c);
 cuart_t         uart_read(void);
+uart_status_t   uart_write(char* msg, int size);
+
+#endif //UART_H
