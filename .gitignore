@@ -4,3 +4,5 @@ CMakeLists.txt
 .build_system/*
 */.idea
 */.vscode
+main.hex
+main.elf
