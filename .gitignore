@@ -5,4 +5,5 @@ CMakeLists.txt
 */.idea
 */.vscode
 */.build*
-
+main.hex
+main.elf
