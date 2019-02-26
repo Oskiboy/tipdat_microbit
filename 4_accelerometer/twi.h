@@ -35,8 +35,8 @@ typedef struct {
     volatile uint32_t ERRORSRC;
     volatile uint32_t RESERVED10[14];
     volatile uint32_t ENABLE;
-    volatile uint32_t PSELSCL;
     volatile uint32_t RESERVED11[1];
+    volatile uint32_t PSELSCL;
     volatile uint32_t PSELSDA;
     volatile uint32_t RESERVED12[2];
     volatile uint32_t RXD;
@@ -47,5 +47,13 @@ typedef struct {
     volatile uint32_t ADDRESS;
 
 } NRF_TWI_REG;
+
+void twi_init();
+void twi_multi_read(
+    uint8_t slave_address,
+    uint8_t start_register,
+    int registers_to_read,
+    uint8_t* data_buffer
+);
 
 #endif //TWI_H
