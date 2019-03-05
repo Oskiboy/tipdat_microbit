@@ -1,1 +1,0 @@
-/usr/bin/cc -g   CMakeFiles/tipdat_microbit2.dir/1_gpio/main.c.o CMakeFiles/tipdat_microbit2.dir/4_accelerometer/accel.c.o CMakeFiles/tipdat_microbit2.dir/4_accelerometer/ubit_led_matrix.c.o CMakeFiles/tipdat_microbit2.dir/4_accelerometer/utility.c.o CMakeFiles/tipdat_microbit2.dir/5_pwm/pwm.c.o CMakeFiles/tipdat_microbit2.dir/5_pwm/utility.c.o  -o tipdat_microbit2 

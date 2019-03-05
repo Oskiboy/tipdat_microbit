@@ -1,3 +1,0 @@
-/home/emil/NTNU/TipDat/tipdat_microbit2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/emil/NTNU/TipDat/tipdat_microbit2/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/emil/NTNU/TipDat/tipdat_microbit2/cmake-build-debug/CMakeFiles/tipdat_microbit2.dir
