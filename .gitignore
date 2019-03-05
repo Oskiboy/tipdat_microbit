@@ -9,3 +9,4 @@ main.hex
 main.elf
 *.o
 *.hex
+*/softdevice/
