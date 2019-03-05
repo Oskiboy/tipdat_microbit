@@ -1,5 +1,5 @@
 FAMILY := nrf51
-SOURCES := main.c uart.c twi.c utility.c accel.c
+SOURCES := main.c uart.c gpio.c twi.c utility.c #accel.c
 SOURCES += ubit_button.c ubit_led_matrix.c
 
 BUILD_DIR := .build_system
@@ -37,7 +37,7 @@ default:
 	@echo Creating hex file
 	$(QUIET)$(OBJCOPY) -O ihex $(BUILD_DIR)/main.elf $(BUILD_DIR)/main.hex
 
-flash:
+flash: default
 	nrfjprog -f $(FAMILY) --sectorerase --program $(BUILD_DIR)/main.hex
 	nrfjprog -f $(FAMILY) --reset
 
