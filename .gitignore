@@ -7,3 +7,6 @@ CMakeLists.txt
 */.build*
 main.hex
 main.elf
+*.o
+*.hex
+*/softdevice/

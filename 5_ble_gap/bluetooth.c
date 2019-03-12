@@ -1,5 +1,6 @@
 #include "bluetooth.h"
 #include <string.h>
+#include "ubit.h"
 
 #include "nrf_sdm.h"
 #include "ble.h"
@@ -30,15 +31,30 @@ uint32_t bluetooth_gap_advertise_start(){
 	uint32_t err_code = 0;
 
 	static uint8_t adv_data[] = {
-		// Add some stuff
+		4, BLE_GAP_AD_TYPE_COMPLETE_LOCAL_NAME,
+		'o', '&', 'e'
 	};
-	uint8_t adv_data_length = 0;
+	uint8_t adv_data_length = 5;
 
-	// Add more stuff
+	err_code = sd_ble_gap_adv_data_set(adv_data, adv_data_length, NULL, 0);
+	if(err_code != NRF_SUCCESS) {
+		ubit_uart_print("ERROR - %d\n\r", err_code);
+	}
 
+	ble_gap_adv_params_t params;
+	memset(&params, 0, sizeof(params));
+
+	params.interval = 0x0100;
+	params.type = BLE_GAP_ADV_TYPE_ADV_IND;
+
+	err_code = sd_ble_gap_adv_start(&params);
+
+	if(err_code != NRF_SUCCESS) {
+		ubit_uart_print("ERROR - %d\n\r", err_code);
+	}
 	// Remove these lines when doing the GAP exercise
-	(void)adv_data;
-	(void)adv_data_length;
+	//(void)adv_data;
+	//(void)adv_data_length;
 
 	return err_code;
 }
