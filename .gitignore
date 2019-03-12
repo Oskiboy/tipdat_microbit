@@ -5,6 +5,7 @@ CMakeLists.txt
 */.idea
 */.vscode
 */.build*
+*/build/*
 main.hex
 main.elf
 *.o
