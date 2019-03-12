@@ -2,6 +2,9 @@
 #define TWI_H
 #include <stdint.h>
 
+#define SDA_PIN	30
+#define SCL_PIN 0
+
 void twi_init();
 
 void twi_multi_read(

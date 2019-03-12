@@ -60,6 +60,17 @@ void twi_init(){
 
     /* 3) Use normal I2C speed, i.e. 100 kHz operation. */
 
+	//1)
+	GPIO->PIN_CNF[SDA_PIN] |= (6 << 8) | (3 << 2);
+	GPIO->PIN_CNF[SCL_PIN] |= (6 << 8) | (3 << 2);
+	TWI0->ERROR 	= 0;
+	TWI0->TXDSENT 	= 0;
+	TWI0->RXDREADY 	= 0;
+	TWI0->PSELSCL = SCL_PIN;
+	TWI0->PSELSDA = SDA_PIN;
+	TWI0->FREQUENCY = 0x01980000;
+	TWI0->ENABLE = 5;
+
 }
 
 void twi_multi_read(
@@ -74,10 +85,14 @@ void twi_multi_read(
     /* 1) Write the register address you want to the slave */
     /*    device. Busy-wait until the register address has */
     /*    been sent by the TWI peripheral. */
-
-
-
-    /* As explained in the guidance lecture, these "no-operation" */
+	TWI0->ADDRESS 	= slave_address;	
+	TWI0->STARTTX 	= 1;
+	TWI0->TXDSENT 	= 0;
+	TWI0->TXD		= start_register | (1 << 7);
+	
+	while(!TWI0->TXDSENT)
+		;
+	/* As explained in the guidance lecture, these "no-operation" */
     /* instructions are necessary because of a timing issue between */
     /* nRF51822 and the LSM303AGR. The reason we use inline assembly */
     /* is to always force the compiler to keep these instructions, */
@@ -92,6 +107,19 @@ void twi_multi_read(
     /*    supply. This amounts to generating a repeated start */
     /*    condition, and reading the amount of registers you */
     /*    want. */
+	TWI0->STARTRX 	= 1;
+	TWI0->RXDREADY 	= 0;
+	for(int i = 0; i < registers_to_read; ++i) {
+		if(i == registers_to_read-1) {
+			TWI0->STOP = 1;
+		}
+		while(!TWI0->RXDREADY)
+			;
+		data_buffer[i] = TWI0->RXD;
+		TWI0->RXDREADY = 0;
+	}
+
+	
 
     /* 2) Remember that you need to generate a NACK at */
     /*    the of the sequence, read the TWI section to figure */

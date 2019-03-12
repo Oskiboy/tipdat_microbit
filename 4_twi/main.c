@@ -8,10 +8,14 @@
 
 int main(){
 	uart_init();
+    utility_print(&uart_send, "\n\rUART Initialized\n\r");
     ubit_led_matrix_init();
+    utility_print(&uart_send, "Matrix Initialized\n\r");
 
 	twi_init();
+    utility_print(&uart_send, "TWI Initialized\n\r");
     accel_init();
+    utility_print(&uart_send, "Accel Initialized\n\r");
 
     int data_buffer[3];
     int x_dot, y_dot;
